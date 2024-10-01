@@ -5,3 +5,7 @@
 .active {
     font-weight: bold;
 }
+
+body {
+    overflow-y: hidden;
+}

@@ -48,7 +48,7 @@ function Login() {
       <h2 className="text-[42px] leading-[49px] font-black my-[36px]">Log in to Twitter</h2>
       <LoginInput placeholder="Phone number, email address" name="login" type="text" extrStyle="mb-[25px]" />
       <LoginInput placeholder="Password" name="password" type="password" extrStyle="mb-[25px]" />
-      <Button extraStyle={"h-[59px]"} type="submit">
+      <Button extraStyle={"h-[59px] w-full"} type="submit">
         {isLoading ? <img className='scale-[3] mx-auto' src={Loading} alt="Loading..." width={22} h /> : 'Log In'}
       </Button>
       <div className="flex justify-between items-center mt-10">

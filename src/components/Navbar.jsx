@@ -1,57 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from "../assets/images/logo.svg"
-import { Link, NavLink } from 'react-router-dom'
-import { BookmarksIcon, Dots, ExploreIcon, HomeIcon, ListsIcon, MassagesIcon, MoreICon, NotificationsIcon, ProfileFillIcon } from '../assets/images/Icons'
+import { Link, NavLink, useLocation } from 'react-router-dom'
+import { BookmarksIcon, BookmarksIconActive, Dots, ExploreIcon, ExploreIconActive, HomeIcon, HomeIconActive, ListsIcon, ListsIconActive, MassagesIcon, MassagesIconActive, MoreICon, MoreIConActive, NotificationsIcon, NotificationsIconActive, ProfileIcon, ProfileIconActive } from '../assets/images/Icons'
 import Button from "../components/Button"
 
 function Navbar() {
     const user = JSON.parse(localStorage.getItem("token"))
+    const {pathname} = useLocation();
+
     const navbarList = [
         {
             id:1,
-            icon:<HomeIcon/>,
+            icon: pathname == "/" ? <HomeIconActive/> : <HomeIcon/>,
             title:"Home",
             path:"/"
         },
         {
             id:2,
-            icon:<ExploreIcon/>,
+            icon: pathname == "/explore" ? <ExploreIconActive/> : <ExploreIcon/>,
             title:"Explore",
             path:"/explore"
         },
         {
             id:3,
-            icon:<NotificationsIcon/>,
+            icon: pathname == "/notifications" ? <NotificationsIconActive/> : <NotificationsIcon/>,
             title:"Notifications",
             path:"/notifications"
         },
         {
             id:4,
-            icon:<MassagesIcon/>,
+            icon: pathname == "/massages" ? <MassagesIconActive/> : <MassagesIcon/>,
             title:"Massages",
             path:"/massages"
         },
         {
             id:5,
-            icon:<BookmarksIcon/>,
+            icon: pathname == "/bookmarks" ? <BookmarksIconActive/> : <BookmarksIcon/>,
             title:"Bookmarks",
             path:"/bookmarks"
         },
         {
             id:6,
-            icon:<ListsIcon/>,
+            icon: pathname == "/lists" ? <ListsIconActive/> : <ListsIcon/>,
             title:"Lists",
             path:"/lists"
         },
         {
             id:7,
-            icon:<ProfileFillIcon/>,
+            icon: pathname == "/profile" ? <ProfileIconActive/> : <ProfileIcon/>,
             title:"Profile",
             path:"/profile"
         },
         {
             id:8,
-            icon:<MoreICon/>,
+            icon: pathname == "/more" ? <MoreIConActive/> : <MoreICon/>,
             title:"More",
             path:"/more"
         },
@@ -63,7 +65,7 @@ function Navbar() {
     }
 
   return (
-    <div className='w-[25%] relative h-[100vh] overflow-y-auto pt-[31px] pl-[130px] pr-[16px]'>
+    <div className='w-[25%] border-r-[1px] border-[#D8D8D8] relative h-[100vh] overflow-y-auto pt-[31px] pl-[115px] pr-[16px]'>
         <Link to={"/"}>
             <img src={Logo} alt="Site Logo" width={40} height={33}/>
         </Link>
@@ -75,7 +77,7 @@ function Navbar() {
                 </NavLink>
             ))}
         </div>
-        <Button type={"button"} extraStyle={"py-[15px] mt-[30px]"}>Tweet</Button>
+        <Button type={"button"} extraStyle={"py-[15px] mt-[30px] w-full"}>Tweet</Button>
         <div className='flex items-center space-x-[10px] absolute bottom-[30px]'>
             <img className='rounded-full' src="https://picsum.photos/500/500" alt="Icon" width={50} height={50} />
             <div className='flex items-center space-x-[42px] justify-between w-[80%]'>

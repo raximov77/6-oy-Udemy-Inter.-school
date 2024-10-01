@@ -38,7 +38,7 @@ function Register() {
         <h3 className='font-bold text-[18px] leading-[23px] mb-[18px]'>Date of birth</h3>
         <p className='text-[16px] leading-[25px] text-[#000000] opacity-60'>Facilisi sem pulvinar velit nunc, gravida scelerisque amet nibh sit. Quis bibendum ante phasellus metus, magna lacinia sed augue. Odio enim nascetur leo mauris vel eget. Pretium id ullamcorper blandit viverra dignissim eget tellus. Nibh mi massa in molestie a sit. Elit congue.</p>
       </div>
-      <Button extraStyle={"h-[59px] mt-[45px]"} type="submit">
+      <Button extraStyle={"h-[59px] mt-[45px] w-full"} type="submit">
         {isLoading ? <img className='scale-[3] mx-auto' src={Loading} alt="Loading..." width={22} h /> : 'Next'}
       </Button>
     </form>
