@@ -82,7 +82,7 @@ function Navbar() {
             ))}
         </div>
         <Button type={"button"} extraStyle={"py-[15px] mt-[30px] w-full"}>Tweet</Button>
-        <div className='flex items-center space-x-[10px] absolute bottom-[30px]'>
+        <div className='flex items-center space-x-[10px] absolute bottom-[5px]'>
             <img className='rounded-full' src="https://picsum.photos/500/500" alt="Icon" width={50} height={50} />
             <div className='flex items-center space-x-[42px] justify-between w-[80%]'>
                <div>
