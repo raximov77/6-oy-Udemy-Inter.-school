@@ -3,8 +3,10 @@ import Logo from "../assets/images/logo.svg"
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { BookmarksIcon, BookmarksIconActive, Dots, ExploreIcon, ExploreIconActive, HomeIcon, HomeIconActive, ListsIcon, ListsIconActive, MassagesIcon, MassagesIconActive, MoreICon, MoreIConActive, NotificationsIcon, NotificationsIconActive, ProfileIcon, ProfileIconActive } from '../assets/images/Icons'
 import Button from "../components/Button"
+import ModalLogout from './ModalLogout'
 
 function Navbar() {
+    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem("token"))
     const {pathname} = useLocation();
@@ -87,9 +89,22 @@ function Navbar() {
                     <strong className='font-semibold text-[16px]'>{user.login}</strong>
                     <p className='text-[16px] opacity-60'>@bobur_mavlonov</p>
                </div>
-               <button onClick={handleLogOut}>
+               <button onClick={() => setIsLogoutModalOpen(true)} className="your-button-class">
                     <Dots/>
-               </button>
+                </button>
+                {isLogoutModalOpen && (
+                <ModalLogout OpenModal={isLogoutModalOpen} setOpenModal={setIsLogoutModalOpen}>
+                <h2 className='text-center'>Are you sure you want to log out?</h2>
+                <div className="flex justify-center mt-4 gap-10">
+                    <button onClick={handleLogOut}  className="bg-red-500 text-white px-4 py-2 rounded-lg">
+                        Yes
+                    </button>
+                    <button onClick={() => setIsLogoutModalOpen(false)} className="bg-gray-500 text-white px-4 py-2 rounded-lg">
+                        No
+                    </button> 
+                </div>
+                </ModalLogout>
+      )}
             </div>
         </div>
     </div>
