@@ -20,7 +20,7 @@ function SiteBar() {
   return (
     <div className="w-[25%] p-4 overflow-auto h-[100vh]">
 
-      <div className="mb-4">
+      <div className="mb-4 z-10">
         <div className="relative">
           <input
             type="text"

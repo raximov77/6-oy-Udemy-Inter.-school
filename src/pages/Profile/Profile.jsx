@@ -2,12 +2,36 @@ import React, { useState } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
 import ProfileBg from "../../assets/images/profile-bg.png"
 import { DateIcon, GlobusIcon, LinkIcon, LocationIcon } from '../../assets/images/Icons'
+import Modal from '../../components/Modal'
+import Button from "../../components/Button" 
 
 function profile() {
   const navigate = useNavigate()
   const user = JSON.parse(localStorage.getItem("token"))
   const [profileImg, setProfileImg] = useState("https://picsum.photos/800/800")
   const [profileActive, setProfileActive] = useState("Tweets")
+  const [isUpdateModal, setIsUpdateModal] = useState(false)
+
+  const [userInfo, setUserInfo ] = useState({
+      avatarImg:profileImg,
+      name: JSON.parse(localStorage.getItem("token")).login,
+      email: "raximovikrom@gmail.com",
+      jobTitle: "UX&UI designer",
+      companyName: "@abutechuz"
+  })
+
+  function handleUpdateUser(e){
+    e.preventDefault()
+    const data = {
+      avatarImg:profileImg,
+      name: e.target.name.value,
+      email:e.target.email.value,
+      jobTitle:e.target.info.value,
+      companyName:e.target.companyName.value
+    }
+    setUserInfo(data)
+    setIsUpdateModal(false)
+  }
 
   return (
     <div className='border-r-[2px] border-[#D8D8D8] h-[100vh] overflow-y-auto'>
@@ -16,19 +40,19 @@ function profile() {
           <i class="fa-solid fa-arrow-left"></i>
         </button>
         <div className='flex flex-col'>
-          <strong className='font-bold text-[20px]'>{user.login}</strong>
+          <strong className='font-bold text-[20px]'>{userInfo.name}</strong>
           <span className='text-[16px] opacity-60 mt-[2px]'></span>
         </div>
       </div>
       <img className='h-[280px]' src={ProfileBg} alt="Bg photo" width={"100%"} />
       <div className='flex items-end -mt-[75px] justify-between px-[25px]'>
         <img className='w-[150px] h-[150px] rounded-full border-[5px] border-[#FFFFFF] ' src={profileImg} alt="Avatar Img" width={100} height={100}/>
-        <button className='font-bold text-[18px] py-[10px] border-[1px] border-[#00000066] rounded-[50px] w-[120px]'>Edit Profile</button>
+        <button onClick={() => setIsUpdateModal(true)} className='font-bold text-[18px] py-[10px] border-[1px] border-[#00000066] rounded-[50px] w-[120px]'>Edit Profile</button>
       </div>
       <div className='p-[25px]'>
-        <strong className='text-[24px]'>{user.login}</strong>
-        <p className='text-[14px] opacity-60'>@bobur_mavlonov</p>
-        <p className='mt-[15px] text-[18px]'>UX&UI designer at <span className='text-[#1DA1F2]'>@abutechuz</span></p>
+        <strong className='text-[24px]'>{userInfo.name}</strong>
+        <p className='text-[14px] opacity-60'>{userInfo.email}</p>
+        <p className='mt-[15px] text-[18px]'>{userInfo.jobTitle} <span className='text-[#1DA1F2]'>{userInfo.companyName}</span></p>
       </div>
       <ul className='px-[25px] flex gap-[10px]'>
         <li className='flex gap-[4px]'>
@@ -66,6 +90,19 @@ function profile() {
           <Link onClick={(e) => setProfileActive(e.target.textContent)} className={`font-bold text-[18px] inline-block pb-[19px] relative before:w-[100%] before:h-[4px] before:rounded-md before:bg-[#1DA1F2] before:absolute before:bottom-0 before:-left-[100%] overflow-hidden duration-300 ${profileActive == "Likes" ? "before:left-0" : ""}`} to={"likes"}>Likes</Link>
       </div>
       <Outlet/>
+      <Modal OpenModal={isUpdateModal} setOpenModal={setIsUpdateModal}>
+          <form onSubmit={handleUpdateUser} autoComplete='off'>
+            <label htmlFor="file">
+              <input onChange={(e) => setProfileImg(URL.createObjectURL(e.target.files[0]))} id='file' type="file" className='hidden'/>
+              <img className='h-[300px]' src={profileImg} alt="Choose Img" width={"100%"} height={200} />
+            </label>
+            <input className='p-2 w-[100%] mt-5 rounded-md outline-none border-[2px] border-slate-300' type="text" required name='name' placeholder='Enter your name'/>
+            <input className='p-2 w-[100%] mt-5 rounded-md outline-none border-[2px] border-slate-300' type="email" required name='email' placeholder='Enter your email'/>
+            <input className='p-2 w-[100%] mt-5 rounded-md outline-none border-[2px] border-slate-300' type="text" required name='info' placeholder='Job title'/>
+            <input className='p-2 w-[100%] mt-5 rounded-md outline-none border-[2px] border-slate-300' type="text" required name='companyName' placeholder='Enter your company name'/>
+            <Button type={"submit"} extraStyle={"w-full mt-5 py-2 text-[22px]"}>Update user</Button>
+          </form>
+      </Modal>
     </div>
   )
 }

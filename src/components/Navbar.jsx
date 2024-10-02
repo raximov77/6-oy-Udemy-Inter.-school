@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import Logo from "../assets/images/logo.svg"
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { BookmarksIcon, BookmarksIconActive, Dots, ExploreIcon, ExploreIconActive, HomeIcon, HomeIconActive, ListsIcon, ListsIconActive, MassagesIcon, MassagesIconActive, MoreICon, MoreIConActive, NotificationsIcon, NotificationsIconActive, ProfileIcon, ProfileIconActive } from '../assets/images/Icons'
 import Button from "../components/Button"
 
 function Navbar() {
+    const navigate = useNavigate()
     const user = JSON.parse(localStorage.getItem("token"))
     const {pathname} = useLocation();
 
@@ -61,6 +62,7 @@ function Navbar() {
 
     function handleLogOut(){
         localStorage.clear()
+        navigate("/")
         window.location.reload()
     }
 
