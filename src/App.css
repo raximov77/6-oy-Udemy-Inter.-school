@@ -2,10 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.active {
-    font-weight: bold;
-}
 
 body {
     overflow-y: hidden;
+    background-color: #FCFAFA;
 }

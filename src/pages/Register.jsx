@@ -1,5 +1,4 @@
 import React, { useContext, useState } from 'react';
-import Logo from "../assets/images/logo.svg";
 import LoginInput from '../components/LoginInput';
 import Button from '../components/Button';
 import { Link, useNavigate } from 'react-router-dom';
@@ -19,7 +18,7 @@ function Register() {
       password: e.target.password.value.trim(),
     };
       setIsLoading(true);
-      toast.success('Successfully registered' + data.login)
+      toast.success('Successfully registered ' + data.login)
       setTimeout(() => {
         setRegister(data)
         navigate(-1)
@@ -27,21 +26,24 @@ function Register() {
       
   }
   return (
-    <form onSubmit={handleRegisterSubmit} className="w-[670px] mx-auto mt-[60px]" autoComplete="off">
-      <Toaster position="top-right" reverseOrder={false}/>
-      <img className='mx-auto' src={Logo} alt="Site" width={40} height={33} />
-      <h2 className="text-[30px] leading-[39px] font-bold my-[35px]">Create an account</h2>
-      <LoginInput placeholder="Name" name="login" type="text" extrStyle="mb-[25px]" />
-      <LoginInput placeholder="Phone number" name="password" type="tel" extrStyle="mb-[25px]" />
-      <div className="mt-[10px]">
-        <Link to={"/"} className='block text-[18px] mb-[30px] leading-[23px] text-[#1DA1F2]'>Sign In</Link>
-        <h3 className='font-bold text-[18px] leading-[23px] mb-[18px]'>Date of birth</h3>
-        <p className='text-[16px] leading-[25px] text-[#000000] opacity-60'>Facilisi sem pulvinar velit nunc, gravida scelerisque amet nibh sit. Quis bibendum ante phasellus metus, magna lacinia sed augue. Odio enim nascetur leo mauris vel eget. Pretium id ullamcorper blandit viverra dignissim eget tellus. Nibh mi massa in molestie a sit. Elit congue.</p>
+    <div className='mt-[88px] text-center mx-auto'>
+      <h2 className="text-[36px] leading-[44px] text-[#4F4F4F] mb-[53px] font-semibold">Welcome, Sign up</h2>
+      <div className='w-[620px] mx-auto bg-white'>
+        <h3 className='w-[315px] mx-auto text-[18px] font-medium text-[#667085] leading-[25px] pt-[72px] mb-[34px]'>It is our great pleasure to have you on board!</h3>
+        <form onSubmit={handleRegisterSubmit} className="w-[348px] mx-auto pb-[100px]" autoComplete="off">
+          <Toaster position="top-right" reverseOrder={false}/>
+          <LoginInput placeholder="Enter your Email" name="email" type="email" extrStyle="mb-[14px]" />
+          <LoginInput placeholder="Create your Login" name="login" type="text" extrStyle="mb-[14px]" />
+          <LoginInput placeholder="Create your Password" name="password" type="tel" extrStyle="mb-[14px]" />
+          <div className="text-left">
+            <Link to={"/"} className='text-[18px] text-[#2D88D4] font-semibold leading-[24px]'>Sign In</Link>
+          </div>
+          <Button extraStyle={"h-[42px] mt-[15px] w-full"} type="submit">
+            {isLoading ? <img className='scale-[3] mx-auto' src={Loading} alt="Loading..." width={22} h /> : 'Sign up'}
+          </Button>
+        </form>
       </div>
-      <Button extraStyle={"h-[59px] mt-[45px] w-full"} type="submit">
-        {isLoading ? <img className='scale-[3] mx-auto' src={Loading} alt="Loading..." width={22} h /> : 'Next'}
-      </Button>
-    </form>
+    </div>
   )
 }
 

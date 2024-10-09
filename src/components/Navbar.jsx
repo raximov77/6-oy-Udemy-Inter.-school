@@ -1,111 +1,77 @@
 import React, { useState } from 'react'
 import Logo from "../assets/images/logo.svg"
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
-import { BookmarksIcon, BookmarksIconActive, Dots, ExploreIcon, ExploreIconActive, HomeIcon, HomeIconActive, ListsIcon, ListsIconActive, MassagesIcon, MassagesIconActive, MoreICon, MoreIConActive, NotificationsIcon, NotificationsIconActive, ProfileIcon, ProfileIconActive } from '../assets/images/Icons'
-import Button from "../components/Button"
-import ModalLogout from './ModalLogout'
+import { Link, Navigate, NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { BillingIcon, DashboardIcon, ExamsIcon, FeaturesIcon, SettingsandprofileIcon, StudentsIcon, TeachersIcon } from '../assets/images/Icons'
 
 function Navbar() {
-    const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
-    const navigate = useNavigate()
-    const user = JSON.parse(localStorage.getItem("token"))
     const {pathname} = useLocation();
 
     const navbarList = [
         {
             id:1,
-            icon: pathname == "/" ? <HomeIconActive/> : <HomeIcon/>,
-            title:"Home",
+            icon: <DashboardIcon/>,
+            title:"Dashboard",
             path:"/"
         },
         {
             id:2,
-            icon: pathname == "/explore" ? <ExploreIconActive/> : <ExploreIcon/>,
-            title:"Explore",
-            path:"/explore"
+            icon: <TeachersIcon/>,
+            title:"Teachers",
+            path:"/teachers"
         },
         {
             id:3,
-            icon: pathname == "/notifications" ? <NotificationsIconActive/> : <NotificationsIcon/>,
-            title:"Notifications",
-            path:"/notifications"
+            icon: <StudentsIcon/>,
+            title:"Students",
+            path:"/students"
         },
         {
             id:4,
-            icon: pathname == "/massages" ? <MassagesIconActive/> : <MassagesIcon/>,
-            title:"Massages",
-            path:"/massages"
+            icon: <BillingIcon/>,
+            title:"Billing",
+            path:"/billing"
         },
         {
             id:5,
-            icon: pathname == "/bookmarks" ? <BookmarksIconActive/> : <BookmarksIcon/>,
-            title:"Bookmarks",
-            path:"/bookmarks"
+            icon: <SettingsandprofileIcon/>,
+            title:"Settings and profile",
+            path:"/Settings-and-profile"
         },
         {
             id:6,
-            icon: pathname == "/lists" ? <ListsIconActive/> : <ListsIcon/>,
-            title:"Lists",
-            path:"/lists"
+            icon: <ExamsIcon/>,
+            title:"Exams",
+            path:"/exams"
         },
         {
             id:7,
-            icon: pathname == "/profile" ? <ProfileIconActive/> : <ProfileIcon/>,
-            title:"Profile",
-            path:"/profile"
-        },
-        {
-            id:8,
-            icon: pathname == "/more" ? <MoreIConActive/> : <MoreICon/>,
-            title:"More",
-            path:"/more"
+            icon: <FeaturesIcon/>,
+            title:"Features",
+            path:"/features"
         },
     ]
 
-    function handleLogOut(){
-        localStorage.clear()
-        navigate("/")
-        window.location.reload()
-    }
-
   return (
-    <div className='w-[25%] border-r-[1px] border-[#D8D8D8] relative h-[100vh] overflow-y-auto pt-[31px] pl-[115px] pr-[16px]'>
-        <Link to={"/"}>
-            <img src={Logo} alt="Site Logo" width={40} height={33}/>
-        </Link>
-        <div className='mt-[49px] space-y-[30px]'>
-            {navbarList.map(item => (
-                <NavLink className={"flex font-semibold text-[18px] leading-[23px] items-center space-x-5"} key={item.id} to={item.path}>
-                    {item.icon}
-                    <span>{item.title}</span>
-                </NavLink>
-            ))}
+    <div className='w-[20%] mx-auto bg-[#152259] border-r-[1px] border-[#D8D8D8] relative h-[100vh] overflow-y-auto pt-[26px] pl-[44px] pr-[36px]'>
+        <div className='text-center'>
+            <Link to={"/"}>
+                <img className='mx-auto' src={Logo} alt="Site Logo" width={65} height={65}/>
+            </Link>   
+            <p className='text-[14px] mt-[22px] cursor-pointer leading-[17px] font-semibold text-[#FFFFFF]'>Udemy Inter. school</p>
         </div>
-        <Button type={"button"} extraStyle={"py-[15px] mt-[30px] w-full"}>Tweet</Button>
-        <div className='flex items-center space-x-[10px] absolute bottom-[5px]'>
-            <img className='rounded-full' src="https://picsum.photos/500/500" alt="Icon" width={50} height={50} />
-            <div className='flex items-center space-x-[42px] justify-between w-[80%]'>
-               <div>
-                    <strong className='font-semibold text-[16px]'>{user.login}</strong>
-                    <p className='text-[16px] opacity-60'>@bobur_mavlonov</p>
-               </div>
-               <button onClick={() => setIsLogoutModalOpen(true)} className="your-button-class">
-                    <Dots/>
-                </button>
-                {isLogoutModalOpen && (
-                <ModalLogout OpenModal={isLogoutModalOpen} setOpenModal={setIsLogoutModalOpen}>
-                <h2 className='text-center'>Are you sure you want to log out?</h2>
-                <div className="flex justify-center mt-4 gap-10">
-                    <button onClick={handleLogOut}  className="bg-red-500 text-white px-4 py-2 rounded-lg">
-                        Yes
-                    </button>
-                    <button onClick={() => setIsLogoutModalOpen(false)} className="bg-gray-500 text-white px-4 py-2 rounded-lg">
-                        No
-                    </button> 
-                </div>
-                </ModalLogout>
-      )}
-            </div>
+        <hr className='mt-[40px] border-[0.5px] text-[#BDBDBD] ml-[-46px] mr-[-36px]'></hr>
+        <div className='mt-[27px] space-y-[8px]'>
+        {navbarList.map(item => (
+        <NavLink
+            key={item.id}
+            to={item.path}
+            className={({ isActive }) =>
+                `flex text-[#FFFFFF] font-semibold text-[17px] leading-[17px] items-center gap-[18px] pl-[16px] py-[12px] rounded-lg border-[2px] border-transparent transition-colors duration-300 ${
+                isActive ? 'bg-[#509CDB]' : 'hover:border-[#509CDB]'}`}>
+            {item.icon}
+            <span>{item.title}</span>
+        </NavLink>
+        ))}
         </div>
     </div>
   )

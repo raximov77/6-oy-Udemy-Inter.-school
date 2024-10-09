@@ -2,7 +2,8 @@ import React from 'react'
 
 function Button({children, type, extraStyle}) {
   return (
-    <button className={`p-[18px] font-bold text-[18px] leading-[23px] hover:opacity-75 duration-300 text-white bg-[#1DA1F2] rounded-[76px] ${extraStyle}`}
+    <button className={`py-[12px] font-bold text-[16px] leading-[17px] hover:opacity-75 duration-300 text-white bg-[#2D88D4] 
+      rounded-[5px] ${extraStyle}`}
     type={type}>{children}</button>
   )
 }
